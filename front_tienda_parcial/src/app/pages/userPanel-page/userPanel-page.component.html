@@ -1,0 +1,44 @@
+<div
+  class="max-w-[100%] h-[100%]  relative p-6 bg-blue-900 bg-opacity-90 text-white rounded-2xl shadow-lg flex flex-col justify-around items-center backdrop-blur-sm">
+
+  <!-- Botones de acción -->
+  <section class="flex flex-wrap gap-4 justify-around items-center w-[90%] h-[20%]">
+    <button
+    (click)="modalCreateService.showModalCreateSwitch()"
+      class="w-[20%] h-[50%] bg-neutral-700 bg-opacity-80 hover:bg-neutral-600 hover:bg-opacity-100 hover:scale-105 transition-transform duration-300 px-4 py-2 rounded-xl shadow-md text-sm">
+      ➕ Crear
+    </button>
+
+    <button
+    (click)="modalSearchedService.showModalSearchedUserSwitch()"
+      class="w-[20%] h-[50%] bg-neutral-500 bg-opacity-80 hover:bg-neutral-400 hover:text-black hover:bg-opacity-100 hover:scale-105 transition-transform duration-300 px-4 py-2 rounded-xl shadow-md text-sm">
+      ✏️ Buscar
+    </button>
+
+  </section>
+
+  <!-- Lista de usuarios con divs -->
+  <div class="w-full h-[90%] relative">
+    <app-user-list />
+  </div>
+  @if(!modalPermisosService.modalAsignacionPermisos()){
+    <permissions class="fixed  z-50 w-full h-full bg-[rgba(0,0,0,0.5)] flex justify-center items-center rounded-2xl top-0 left-0"/>
+  }
+  @if(!modalSearchedService.modalSearchedUser()){
+    <search-user class="fixed  z-30 w-full h-full bg-[rgba(0,0,0,0.5)] flex justify-center items-center rounded-2xl top-0 left-0"/>
+  }
+  @if(!mostrarUsuarioBuscado.mostrarUsuarioBuscado()){
+    <show-user-searched class="fixed  z-30 w-full h-full bg-[rgba(0,0,0,0.5)] flex justify-center items-center rounded-2xl top-0 left-0"/>
+  }
+  <!-- Modal de creación de usuario -->
+  @if (!modalCreateService.modalCreateUser()) {
+    <app-create-user-component
+      class="absolute w-full h-full bg-[rgba(0,0,0,0.5)] flex justify-center items-center rounded-2xl"
+    />
+  }
+  @if (!modalUpdateUserService.modalUpdateUser()) {
+    <update-user-component class="fixed  z-50 w-full h-full bg-[rgba(0,0,0,0.5)] flex justify-center items-center rounded-2xl top-0 left-0"
+      />
+    }
+
+</div>
