@@ -10,6 +10,9 @@ import { FormularioCrearComponent } from "../components/marcas/formularioCrear/f
 import { ModalActualizarComponent } from "../components/categoria/modal-actualizar/modal-actualizar.component";
 import { FormularioActualizarComponent } from "../components/marcas/formularioActualizar/formularioActualizar.component";
 import { MarcaSingleModalComponent } from "../components/marcas/marcaSingleModal/marcaSingleModal.component";
+import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
+
 
 @Component({
   selector: 'marca-page',
@@ -92,4 +95,61 @@ export class MarcaPageComponent {
       this.toastr.error('La Marca no fue encontrada!');
     }
   }
+
+  exportPDF() {
+    const doc = new jsPDF();
+
+    const fecha = new Date();
+    const fechaStr = fecha.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+
+    // Encabezado de la tabla de detalle
+    const encabezados = [['ID', 'Nombre', 'Estado']];
+    const filas = this.lista().map((m: Marca) => [
+      m.id,
+      m.nombre,
+      m.estado ? 'Activo' : 'Inactivo'
+    ]);
+
+    // Cálculo de totales
+    const total = this.lista().length;
+    const activos = this.lista().filter(m => m.estado).length;
+    const inactivos = total - activos;
+
+    const resumenEncabezados = [['Total Marcas', 'Activas', 'Inactivas']];
+    const resumenCuerpo = [[total, activos, inactivos]];
+
+    let finalY = 0;
+
+    // Tabla de resumen
+    autoTable(doc, {
+      head: resumenEncabezados,
+      body: resumenCuerpo,
+      startY: 28,
+      styles: { fontSize: 10 },
+      headStyles: { fillColor: [34, 139, 34] }, // verde
+      didDrawPage: (data) => {
+        doc.setFontSize(16);
+        doc.text('Reporte de Marcas', 14, 15);
+        doc.setFontSize(10);
+        doc.text(`Fecha: ${fechaStr}`, 14, 22);
+        finalY = data.cursor?.y ?? 40;
+      }
+    });
+
+    // Tabla de detalle
+    autoTable(doc, {
+      startY: finalY + 10,
+      head: encabezados,
+      body: filas,
+      styles: { fontSize: 10 },
+      headStyles: { fillColor: [63, 81, 181] }, // azul
+    });
+
+    doc.save('reporte_marcas.pdf');
+  }
+
 }

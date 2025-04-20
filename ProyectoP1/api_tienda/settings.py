@@ -54,7 +54,8 @@ INSTALLED_APPS = [
     'carrito',
     'detalle_carrito',
     'factura',
-    'detalle_factura'
+    'detalle_factura',
+    'imagenes'
 ]
 
 MIDDLEWARE = [

@@ -34,6 +34,7 @@ urlpatterns = [
     path('factura/',include('factura.urls')),
     path('detalle_factura/',include('detalle_factura.urls')),
     path('carrito/',include('carrito.urls')),
-    path('detalle_carrito/',include('detalle_carrito.urls'))
+    path('detalle_carrito/',include('detalle_carrito.urls')),
+    path('imagenes/',include('imagenes.urls'))
     
 ]

@@ -11,7 +11,5 @@ import { ProductoApiService } from '../../../../services/productoApi.service';
 export class ProductoListComponentComponent {
   productoService=inject(ProductoApiService);
 
-  ngOnInit(): void {
-    this.productoService.getAllProducts();
-  }
+  listaProductos=this.productoService.productList;
 }

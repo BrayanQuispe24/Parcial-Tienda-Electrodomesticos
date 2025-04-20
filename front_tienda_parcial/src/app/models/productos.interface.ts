@@ -5,5 +5,6 @@ export interface Productos {
   marca: string,
   categoria: string,
   cantidad: number,
-  precio: number
+  precio: number,
+  estado:string
 }

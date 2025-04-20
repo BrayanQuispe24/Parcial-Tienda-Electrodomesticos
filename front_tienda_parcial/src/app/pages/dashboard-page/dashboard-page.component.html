@@ -1,9 +1,11 @@
-<div class="flex w-full h-screen overflow-hidden bg-blue-950 text-white p-2 box-border gap-[5px]">
+<div class=" lg:flex w-full lg:h-screen lg:overflow-hidden bg-blue-950 text-white p-2 box-border gap-[5px]">
   <!-- Sidebar -->
   <aside
-    class="min-w-[15%] w-[18%] max-w-[20%] bg-[#102e4d] flex flex-col p-6 space-y-4 rounded-r-2xl shadow-md rounded-tl-[10px] rounded-bl-[10px]">
-    <h1 class="text-2xl font-bold mb-6 text-center">Mi Dashboard</h1>
-    <nav class="flex flex-col space-y-3">
+    class="lg:min-w-[15%] lg:w-[18%] lg:max-w-[20%] bg-[#102e4d] flex  lg:flex-col p-6 space-y-4 rounded-r-2xl shadow-md rounded-tl-[10px] rounded-bl-[10px]">
+    <div class="flex justify-center ">
+      <img src="https://res.cloudinary.com/diqqfka6g/image/upload/v1745173062/lspebos66o4v6hw1biv0.jpg" alt="LOGO" class="rounded-2xl w-[150px] h-[150px]">
+    </div>
+    <nav class=" w-[100%] gap-2  grid grid-cols-2 lg:flex lg:flex-col lg:space-y-3">
       <a [routerLink]="['categorias']" class="px-4 py-4 rounded-xl bg-blue-800 hover:bg-blue-700 transition text-sm">
         Gestionar Categorias</a>
       <a [routerLink]="['marcas']" class="px-4 py-4 rounded-xl bg-blue-800 hover:bg-blue-700 transition text-sm">
@@ -14,20 +16,22 @@
         class="px-4 py-4 rounded-xl bg-blue-800 hover:bg-blue-700 transition text-sm">📦 Gestionar Producto</a>
       <a [routerLink]="['personal']" routerLinkActive="router-link-active"
         class="px-4 py-4 rounded-xl bg-blue-800 hover:bg-blue-700 transition text-sm">👥 Gestionar Personal</a>
+      <a [routerLink]="['clientes']" routerLinkActive="router-link-active"
+        class="px-4 py-4 rounded-xl bg-blue-800 hover:bg-blue-700 transition text-sm">👥 Gestionar Clientes</a>
       <a [routerLink]="['ventas']" routerLinkActive="router-link-active"
         class="px-4 py-4 rounded-xl bg-blue-800 hover:bg-blue-700 transition text-sm">💰 Gestionar Ventas</a>
       <a [routerLink]="['userPanel']" routerLinkActive="router-link-active"
         class="px-4 py-4 rounded-xl bg-blue-800 hover:bg-blue-700 transition text-sm">👥 Gestionar Usuarios</a>
 
     </nav>
-    <div class="mt-auto pt-6 border-t border-blue-700">
+    <div class="hidden mt-auto pt-6 border-t border-blue-700 lg:block">
       <button class="w-full bg-red-600 hover:bg-red-700 transition px-4 py-4 rounded-xl mt-4" (click)="logout()">Cerrar
         Sesión</button>
     </div>
   </aside>
 
   <!-- Contenido principal -->
-  <div class="max-w-[85%] w-[82%] min-w-[80%] overflow-hidden">
+  <div class="max-h-[100%] lg:max-w-[85%] lg:w-[82%] lg:min-w-[80%] lg:overflow-hidden">
     <router-outlet />
   </div>
 </div>

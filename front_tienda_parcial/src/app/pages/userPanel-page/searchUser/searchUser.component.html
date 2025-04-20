@@ -1,6 +1,6 @@
 <div class="fixed inset-0 flex justify-center items-center z-50">
   <!-- Modal -->
-  <div class="bg-neutral-800 text-white rounded-2xl shadow-xl px-8 py-6 w-[700px] h-[400px] relative flex flex-col justify-between">
+  <div class="mx-auto flex flex-col justify-around p-6 bg-[#102e4d] bg-opacity-90 text-white rounded-2xl shadow-lg backdrop-blur-sm w-[500px] h-[400px]">
     <!-- Botón cerrar -->
     <button
       class="absolute top-4 right-4 text-white bg-red-600 hover:bg-red-500 rounded-[10px] w-[60px] h-10 flex items-center justify-center text-xl font-bold transition"
@@ -12,7 +12,7 @@
     <h2 class="text-4xl font-extrabold text-center">Buscar Usuario</h2>
 
     <!-- Formulario -->
-    <div class="flex flex-col justify-center flex-grow gap-6">
+    <div class="flex flex-col justify-center flex-grow gap-20">
       <div>
         <label for="inputUsuario" class="block text-lg font-bold mb-2">Nombre o Email</label>
         <input
@@ -20,7 +20,7 @@
         (input)="email.set(txtemail.value)"
           type="text"
           id="inputUsuario"
-          class="w-full px-6 py-3 rounded-lg bg-neutral-700 placeholder-gray-400 text-white text-base font-semibold focus:outline-none focus:ring-4 focus:ring-blue-500 transition"
+          class="w-full px-4 py-2 rounded-lg text-white border-2 bg-[#102e4d] border-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
           placeholder="Ej. juan@email.com"
           #txtemail
         />

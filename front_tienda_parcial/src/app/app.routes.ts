@@ -11,6 +11,7 @@ import { VentasPageComponent } from './pages/ventas-page/ventas-page.component';
 import { CategoriaPageComponent } from './pages/categoria-page/categoria-page.component';
 import { MarcaPageComponent } from './pages/marca-page/marca-page.component';
 import { InventarioPageComponent } from './pages/inventario-page/inventario-page.component';
+import { ClientePageComponent } from './pages/cliente-page/cliente-page.component';
 
 export const routes: Routes = [
   {
@@ -57,6 +58,10 @@ export const routes: Routes = [
       {
         path:'inventario',
         component:InventarioPageComponent
+      },
+      {
+        path:'clientes',
+        component:ClientePageComponent
       },
       {
         path: '**',
