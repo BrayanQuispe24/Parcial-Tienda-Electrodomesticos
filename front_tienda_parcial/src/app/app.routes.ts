@@ -29,7 +29,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'userPanel',
-        component: UserPanelPageComponent
+        component: UserPanelPageComponent,
       },
       {
         path: '',

@@ -1,10 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
-@theme {
-  /* Definición de nuevos breakpoints */
-  /* O puedes sobrescribir el sm por defecto (640px) */
-  --breakpoint-sm: 500px;
-}
+
 
 html,
 body {
@@ -12,9 +8,13 @@ body {
   padding: 0;
   overflow-x: hidden;
 }
-div{
+div,aside{
   scrollbar-width: none;
 }
 section{
   scrollbar-width: none;
+}
+html, body {
+  height: 100%;
+  margin: 0;
 }

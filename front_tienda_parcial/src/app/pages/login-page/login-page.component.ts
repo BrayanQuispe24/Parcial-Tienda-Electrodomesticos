@@ -26,13 +26,6 @@ export class LoginPageComponent {
 
 
   constructor() {
-    //effect(() => {
-    //  const token = this.userService.dataAuth().token;
-    //  if (token.length > 0) {
-    //    console.log('Token recibido, navegando...');
-    //    this.router.navigate(['/dashboard']);
-    //  }
-    //});
   }
 
 
@@ -66,10 +59,10 @@ export class LoginPageComponent {
             e.error?.message ||
             "Error al iniciar sesion";
 
-            this.toastr.error(errorMessage, 'Error', {
-              positionClass: 'toast-bottom-right',
-              timeOut:3000// Nota que se usa 'timeOut' en lugar de 'timeout'
-            });
+          this.toastr.error(errorMessage, 'Error', {
+            positionClass: 'toast-bottom-right',
+            timeOut: 3000// Nota que se usa 'timeOut' en lugar de 'timeout'
+          });
         }
       }
       );

@@ -5,10 +5,10 @@
   <div class="flex justify-between items-center py-4 px-6 bg-white/10 rounded-xl shadow-lg flex-none flex-wrap gap-4">
     <h1 class="text-4xl font-bold text-center flex-1">Gestión de Ventas</h1>
     <div class="flex gap-2 flex-wrap justify-center">
-      <button
-      (click)="exportPDFFacturas()"
-      class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-semibold">Descargar Reporte</button>
-      <button class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-semibold">Imprimir</button>
+      <button (click)="exportPDFFacturas()"
+        class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-semibold">Descargar PDF</button>
+      <button (click)="exportarFacturasAExcel()"
+        class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-semibold">Descargar EXCEL</button>
     </div>
   </div>
 
@@ -16,16 +16,17 @@
   <div class="flex gap-4 flex-wrap items-center bg-white/10 rounded-xl px-6 py-3 shadow-inner flex-none">
     <div class="flex flex-col">
       <label for="fechaInicio" class="text-sm">Desde:</label>
-      <input id="fechaInicio" type="date"
+      <input (change)="fechaInicio.set(txtInicio.value)" #txtInicio id="fechaInicio" type="date"
         class="bg-[#102e4d] border border-blue-600 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
     </div>
     <div class="flex flex-col">
       <label for="fechaFin" class="text-sm">Hasta:</label>
-      <input id="fechaFin" type="date"
+      <input (change)="fechaFinal.set(txtFinal.value)" #txtFinal id="fechaFin" type="date"
         class="bg-[#102e4d] border border-blue-600 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
     </div>
     <div class="flex-1 flex justify-end">
-      <button class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg font-semibold h-fit mt-5">Filtrar</button>
+      <button (click)="mostrarI()"
+        class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg font-semibold h-fit mt-5">Filtrar</button>
     </div>
   </div>
 
@@ -41,10 +42,10 @@
         class="w-[100%] bg-[#102e4d] rounded-xl p-1 shadow-inner border-2 border-blue-800 flex justify-around mt-1 mb-3">
         <div class="w-[60%] grid grid-cols-5  gap-5">
           <span class="text-center">ID</span>
-          <span class="text-center" >ESTADO</span>
-          <span class="text-center" >FECHA</span>
-          <span class="text-center" >METODO</span>
-          <span class="text-center" >MONTO</span>
+          <span class="text-center">ESTADO</span>
+          <span class="text-center">FECHA</span>
+          <span class="text-center">METODO</span>
+          <span class="text-center">MONTO</span>
         </div>
         <div class="w-[40%] flex justify-end pr-[50px]">
           ACCIONES
@@ -60,11 +61,15 @@
     <!-- FORMULARIO -->
     <div
       class="w-full md:max-w-[30%] bg-white/10 rounded-xl p-4 shadow-inner flex flex-col justify-around border-2 border-blue-800 relative gap-4 overflow-y-auto">
-      <h2 class="text-2xl font-bold text-center">Nueva Venta</h2>
+      <div>
+        <h2 class="text-2xl font-bold text-center">Nueva Venta</h2>
+        <button (click)="crearFactura()"
+          class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-semibold">INICIAR</button>
+      </div>
 
       <label class="flex flex-col gap-1">
         Cliente:
-        <input type="text"
+        <input [value]="nombreCliente()" (input)="nombreCliente.set(txtnombre.value)" #txtnombre type="text"
           class="px-3 py-2 rounded-lg bg-[#102e4d] border border-blue-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-400" />
       </label>
 
@@ -74,23 +79,32 @@
           class="px-3 py-2 rounded-lg bg-[#102e4d] border border-blue-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-400" />
       </label>
 
+      <label class="flex flex-col gap-1 full">
+        Producto:
+        <div class="flex justify-between w-full">
+          <div class="flex flex-col gap-3 w-[80%]"><input [value]="nombreProducto()" (input)="nombreProducto.set(txtnombreProducto.value)"
+              #txtnombreProducto type="text"
+              class="w-[250px] px-3 py-2 rounded-lg bg-[#102e4d] border border-blue-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            <input [value]="cantidad()" (input)="cantidad.set(txtcantidad.value)" #txtcantidad type="text"
+              class="w-[250px] px-3 py-2 rounded-lg bg-[#102e4d] border border-blue-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-400" />
+          </div>
+          <button (click)="insertarDetalleFactura()"
+            class="w-[20%] h-[40%] mt-2 bg-green-600 hover:bg-green-700 rounded-lg text-white font-semibold transition-colors self-center">Agregar</button>
+        </div>
+      </label>
       <label class="flex flex-col gap-1">
         Total:
-        <input type="number"
+        <input [value]="total()" readonly type="number"
           class="px-3 py-2 rounded-lg bg-[#102e4d] border border-blue-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-400" />
       </label>
 
       <label class="flex flex-col gap-1">
         Estado:
-        <select
-          class="px-3 py-2 rounded-lg bg-[#102e4d] border border-blue-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-400">
-          <option value="pagada">Pagada</option>
-          <option value="pendiente">Pendiente</option>
-          <option value="cancelada">Cancelada</option>
-        </select>
+        <input [value]="estado()" (input)="estado.set(txtestado.value)" #txtestado type="text"
+          class="px-3 py-2 rounded-lg bg-[#102e4d] border border-blue-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-400" />
       </label>
 
-      <button
+      <button (click)="cambiarEstadoFactura()"
         class="px-4 py-2 mt-2 bg-green-600 hover:bg-green-700 rounded-lg text-white font-semibold transition-colors">
         Guardar Venta
       </button>

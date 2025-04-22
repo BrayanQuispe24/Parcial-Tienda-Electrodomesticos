@@ -30,6 +30,8 @@ export class UserPanelPageComponent {
 
   public lista = computed(() => (this.usuarioService.listUser()));
 
+  cantidad=computed(()=>(this.lista().length));
+
   exportPDF() {
     const doc = new jsPDF();
 
